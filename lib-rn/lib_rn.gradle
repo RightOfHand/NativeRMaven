@@ -1,0 +1,25 @@
+apply plugin: 'maven'
+def VERSION_NAME='0.1.2'
+def ARTIFACT_ID='rn'
+def GROUP_ID='com.songy.lib'
+
+
+uploadArchives{
+
+    repositories {
+        mavenDeployer {
+            repository(url: MAVEN_HOST) {
+                authentication(userName: NEXUS_NAME, password: NEXUS_PASSWORD)
+            }
+            pom.project {
+                version VERSION_NAME
+                artifactId ARTIFACT_ID
+                groupId GROUP_ID
+                description 'react lib for Android'
+            }
+        }
+    }
+}
+
+
+
