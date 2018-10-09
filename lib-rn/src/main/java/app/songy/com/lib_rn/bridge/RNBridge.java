@@ -1,5 +1,7 @@
 package app.songy.com.lib_rn.bridge;
 
+import android.app.Activity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.react.bridge.Callback;
@@ -7,6 +9,10 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
+import com.hwangjr.rxbus.RxBus;
+
+import app.songy.com.lib_rn.BusActions;
+import app.songy.com.lib_rn.MyReactActivity;
 
 /**
  * Description:
@@ -15,6 +21,7 @@ import com.facebook.react.module.annotations.ReactModule;
  */
 @ReactModule(name="RNBridge")
 public class RNBridge extends ReactContextBaseJavaModule {
+    private static final  String TAG=RNBridge.class.getSimpleName();
     private ReactApplicationContext mContext;
     public RNBridge(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -28,7 +35,11 @@ public class RNBridge extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void callNative(String msg){
-        Toast.makeText(getCurrentActivity(),"react lib"+msg,Toast.LENGTH_LONG).show();
+
+        Activity mCurrentActvity=getCurrentActivity();
+        if (mCurrentActvity instanceof MyReactActivity){
+            RxBus.get().post(BusActions.BUS_UPDATE_UI,msg);
+        }
     }
 
 

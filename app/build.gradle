@@ -36,7 +36,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    api 'com.songy.lib:rn:0.1.2'
-
-//    api "com.facebook.react:react-native:0.56.0"
+//    api 'com.songy.lib:rn:0.1.2'
+    api project(':lib-rn')
 }
