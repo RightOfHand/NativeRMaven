@@ -5,7 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import app.songy.com.lib_rn.MyReactActivity;
+import app.songy.com.lib_rn.ReactContainerActivity;
+import app.songy.com.lib_rn.bridge.RNConstants;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,7 +17,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.tv_go).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, MyReactActivity.class);
+                Intent intent=new Intent(MainActivity.this, ReactContainerActivity.class);
+                intent.putExtra(RNConstants.RN_PARAM_BUNDLE_NAME,"index.android.bundle");
+                intent.putExtra(RNConstants.RN_PARAM_JS_MAIN_PATH,"index");
+                intent.putExtra(RNConstants.RN_PARAM_MODULE_NAME,"android");
                 startActivity(intent);
             }
         });

@@ -37,6 +37,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     api 'com.facebook.react:react-native:0.56.0'
     implementation 'com.hwangjr.rxbus:rxbus:2.0.0'
+    implementation 'com.alibaba:fastjson:1.2.51'
 }
 
-apply from:"./lib_rn.gradle"
+//apply from:"./lib_rn.gradle"

@@ -18,7 +18,7 @@ import app.songy.com.lib_rn.bridge.RNBridgePackage;
  * Created by song on 2018/9/26.
  * email：bjay20080613@qq.com
  */
-public class MyReactApplication extends Application implements ReactApplication {
+public class ReactBaseApplication extends Application implements ReactApplication {
     private static final String FILE_NAME = "index.android";
     private static Context context;
 

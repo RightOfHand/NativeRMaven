@@ -1,13 +1,14 @@
 package app.songy.com.lib_rn;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.ReactInstanceManagerBuilder;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
@@ -17,34 +18,47 @@ import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
 
+import app.songy.com.lib_rn.bridge.RNConstants;
 import app.songy.com.lib_rn.bridge.RNBridgePackage;
 import android.util.Log;
+
 
 /**
  * Description:
  * Created by song on 2018/9/21.
  * email：bjay20080613@qq.com
  */
-public class MyReactActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
+public class ReactContainerActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler {
+    private static final  String TAG=ReactContainerActivity.class.getSimpleName();
     private ReactRootView mReactRootView;
     private ReactInstanceManager mReactInstanceManager;
-    private String url="http://localhost:8081/index.bundle?platform=android";
-    private RelativeLayout mNavbar ;
-    private ImageButton mImageButton;
+    private ReactInstanceManagerBuilder builder;
 
+    private String url="http://localhost:8081/index.bundle?platform=android";
+    private String bundleName;
+    private String jsMainPath;
+    private String moduleName;
+
+    @Subscribe(tags = @Tag(RNConstants.BUS_UPDATE_U),thread = EventThread.MAIN_THREAD)
+    public void accept(String data){
+        JSONObject jsonObject=JSON.parseObject(data);
+        JSONObject params=jsonObject.getJSONObject(RNConstants.RN_PARAMS);
+        bundleName=params.getString(RNConstants.RN_PARAM_BUNDLE_NAME);
+        jsMainPath=params.getString(RNConstants.RN_PARAM_JS_MAIN_PATH);
+        moduleName=params.getString(RNConstants.RN_PARAM_MODULE_NAME);
+
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_react_index);
         RxBus.get().register(this);
-        mReactRootView=(ReactRootView) findViewById(R.id.react_root);
-        mNavbar=(RelativeLayout) findViewById(R.id.toolbar);
-        mImageButton=(ImageButton) findViewById(R.id.toolbar_back);
-
+        Log.d(TAG,"onCreate:"+"................");
+        getIntentParam();
+        mReactRootView=new ReactRootView(this);
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
-                .setBundleAssetName("index.android.bundle")
-                .setJSMainModulePath("index")
+                .setBundleAssetName(bundleName)
+                .setJSMainModulePath(jsMainPath)
                 .addPackage(new MainReactPackage())
                 .addPackage(new RNBridgePackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
@@ -52,11 +66,15 @@ public class MyReactActivity extends AppCompatActivity implements DefaultHardwar
                 .build();
         // 注意这里的moduleName必须对应“index.js”中的
         // “AppRegistry.registerComponent()”的第一个参数
-        mReactRootView.startReactApplication(mReactInstanceManager, "android", null);
-
-        back();
+        mReactRootView.startReactApplication(mReactInstanceManager, moduleName, null);
+        setContentView(mReactRootView);
     }
 
+    private void getIntentParam(){
+        bundleName=getIntent().getStringExtra(RNConstants.RN_PARAM_BUNDLE_NAME);
+        jsMainPath=getIntent().getStringExtra(RNConstants.RN_PARAM_JS_MAIN_PATH);
+        moduleName=getIntent().getStringExtra(RNConstants.RN_PARAM_MODULE_NAME);
+    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -64,25 +82,9 @@ public class MyReactActivity extends AppCompatActivity implements DefaultHardwar
         }
     }
 
-    public  void showNavBar(String msg){
-        if (msg==null) return;
 
 
-    }
-    private void back(){
-        mImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
 
-    @Subscribe(tags = @Tag(BusActions.BUS_UPDATE_UI),thread = EventThread.MAIN_THREAD)
-    public void accept(String msg){
-        Log.d("accept","挂载了"+":"+msg);
-        mNavbar.setVisibility(msg.equals("yes") ? View.VISIBLE:View.GONE);
-    }
     @Override
     protected void onResume() {
         super.onResume();

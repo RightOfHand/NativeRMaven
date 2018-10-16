@@ -9,7 +9,7 @@ export default class ProfileScreen extends React.Component {
 
     });
     componentWillMount() {
-               RNBridge.callNative("no")
+               RNBridge.send("no")
              }
   render() {
     return (
@@ -22,7 +22,7 @@ export default class ProfileScreen extends React.Component {
 }
 var styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   hello: {
     fontSize: 20,

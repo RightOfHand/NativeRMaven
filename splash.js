@@ -4,23 +4,30 @@ import RNBridge from './CallNative'
 
 type Props = {};
 export default class SplashScreen extends React.Component<Props> {
-// static navigationOptions = {
-//         title: 'react-native first page',
-//
-//         headerText:{
-//             textAlign: 'center',
-//             fontWeight: 'bold',
-//         },
-//     };
+ static navigationOptions = {
+         title: 'react-native first page',
+
+         headerText:{
+             textAlign: 'center',
+             fontWeight: 'bold',
+         },
+     };
+
 
      componentWillMount() {
-           RNBridge.callNative("yes")
+
          }
+    _callNativeModule(){
+      RNBridge.send("yes",(result) => {
+
+              })
+    }
   render() {
   const { navigate } = this.props.navigation;
+  //navigate('ProfileScreen',{message:"come here"})
     return (
       <View style={styles.container}>
-        <Text style={styles.hello} onPress={()=>navigate('ProfileScreen',{message:"come here"})}>go to next</Text>
+        <Text style={styles.hello} onPress={()=>this._callNativeModule()}>go to next</Text>
       </View>
 
     );
