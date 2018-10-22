@@ -5,7 +5,7 @@ import RNBridge from './CallNative'
 type Props = {};
 export default class SplashScreen extends React.Component<Props> {
  static navigationOptions = {
-         title: 'react-native first page',
+         title: 'code-push',
 
          headerText:{
              textAlign: 'center',

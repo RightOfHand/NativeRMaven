@@ -38,6 +38,7 @@ public class ReactBaseApplication extends Application implements ReactApplicatio
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
                     new RNBridgePackage()
+
             );
         }
 

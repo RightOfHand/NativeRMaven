@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("app.songy.com.lib_rn.test", appContext.getPackageName());
+        assertEquals("app.songy.com.maven.test", appContext.getPackageName());
     }
 }

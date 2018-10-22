@@ -6,8 +6,6 @@ package app.songy.com.lib_rn.bridge;
  * email：bjay20080613@qq.com
  */
 public interface RNConstants {
-    String BUS_UPDATE_U="bus_update_u";
-    String BUS_UPDATE_UI="bus_update_ui";
 
 
     String RN_MODULE_NAME="module";
