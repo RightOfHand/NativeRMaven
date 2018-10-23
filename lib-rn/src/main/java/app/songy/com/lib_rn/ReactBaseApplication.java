@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import app.songy.com.lib_rn.bridge.RNBridgePackage;
+import app.songy.com.lib_rn.codepush.react.CodePush;
 
 /**
  * Description:
@@ -37,7 +38,8 @@ public class ReactBaseApplication extends Application implements ReactApplicatio
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
-                    new RNBridgePackage()
+                    new RNBridgePackage(),
+                    new CodePush("00W9W19LD8XNnua8NZg1iyq5wp4b4ksvOXqog",getApplicationContext(),BuildConfig.DEBUG,"http://172.16.12.95:3000/")
 
             );
         }
@@ -50,7 +52,7 @@ public class ReactBaseApplication extends Application implements ReactApplicatio
         @javax.annotation.Nullable
         @Override
         protected String getJSBundleFile() {
-            return super.getJSBundleFile();
+            return CodePush.getJSBundleFile();
         }
     };
 

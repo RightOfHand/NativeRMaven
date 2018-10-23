@@ -1,3 +1,20 @@
+/**
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ 'License'); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+ http://www.apache.org/licenses/LICENSE-2.0
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ 'AS IS' BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+ */
+
 var util = require('util'),
     f = util.format,
     EventEmitter = require('events').EventEmitter,
@@ -608,10 +625,17 @@ pbxProject.prototype.addToXcVersionGroupSection = function(file) {
 
 pbxProject.prototype.addToPluginsPbxGroup = function(file) {
     var pluginsGroup = this.pbxGroupByName('Plugins');
-    pluginsGroup.children.push(pbxGroupChild(file));
+    if (!pluginsGroup) {
+        this.addPbxGroup([file.path], 'Plugins');
+    } else {
+        pluginsGroup.children.push(pbxGroupChild(file));
+    }
 }
 
 pbxProject.prototype.removeFromPluginsPbxGroup = function(file) {
+    if (!this.pbxGroupByName('Plugins')) {
+        return null;
+    }
     var pluginsGroupChildren = this.pbxGroupByName('Plugins').children, i;
     for (i in pluginsGroupChildren) {
         if (pbxGroupChild(file).value == pluginsGroupChildren[i].value &&
@@ -624,10 +648,17 @@ pbxProject.prototype.removeFromPluginsPbxGroup = function(file) {
 
 pbxProject.prototype.addToResourcesPbxGroup = function(file) {
     var pluginsGroup = this.pbxGroupByName('Resources');
-    pluginsGroup.children.push(pbxGroupChild(file));
+    if (!pluginsGroup) {
+        this.addPbxGroup([file.path], 'Resources');
+    } else {
+        pluginsGroup.children.push(pbxGroupChild(file));
+    }
 }
 
 pbxProject.prototype.removeFromResourcesPbxGroup = function(file) {
+    if (!this.pbxGroupByName('Resources')) {
+        return null;
+    }
     var pluginsGroupChildren = this.pbxGroupByName('Resources').children, i;
     for (i in pluginsGroupChildren) {
         if (pbxGroupChild(file).value == pluginsGroupChildren[i].value &&
@@ -640,10 +671,17 @@ pbxProject.prototype.removeFromResourcesPbxGroup = function(file) {
 
 pbxProject.prototype.addToFrameworksPbxGroup = function(file) {
     var pluginsGroup = this.pbxGroupByName('Frameworks');
-    pluginsGroup.children.push(pbxGroupChild(file));
+    if (!pluginsGroup) {
+        this.addPbxGroup([file.path], 'Frameworks');
+    } else {
+        pluginsGroup.children.push(pbxGroupChild(file));
+    }
 }
 
 pbxProject.prototype.removeFromFrameworksPbxGroup = function(file) {
+    if (!this.pbxGroupByName('Frameworks')) {
+        return null;
+    }
     var pluginsGroupChildren = this.pbxGroupByName('Frameworks').children;
 
     for (i in pluginsGroupChildren) {
@@ -677,10 +715,17 @@ pbxProject.prototype.removeFromPbxEmbedFrameworksBuildPhase = function (file) {
 
 pbxProject.prototype.addToProductsPbxGroup = function(file) {
     var productsGroup = this.pbxGroupByName('Products');
-    productsGroup.children.push(pbxGroupChild(file));
+    if (!productsGroup) {
+        this.addPbxGroup([file.path], 'Products');
+    } else {
+        productsGroup.children.push(pbxGroupChild(file));
+    }
 }
 
 pbxProject.prototype.removeFromProductsPbxGroup = function(file) {
+    if (!this.pbxGroupByName('Products')) {
+        return null;
+    }
     var productsGroupChildren = this.pbxGroupByName('Products').children, i;
     for (i in productsGroupChildren) {
         if (pbxGroupChild(file).value == productsGroupChildren[i].value &&
@@ -1110,7 +1155,7 @@ pbxProject.prototype.removeFromFrameworkSearchPaths = function(file) {
 
         searchPaths = buildSettings[SEARCH_PATHS];
 
-        if (searchPaths) {
+        if (searchPaths && Array.isArray(searchPaths)) {
             var matches = searchPaths.filter(function(p) {
                 return p.indexOf(new_path) > -1;
             });
@@ -1157,7 +1202,7 @@ pbxProject.prototype.removeFromLibrarySearchPaths = function(file) {
 
         searchPaths = buildSettings[SEARCH_PATHS];
 
-        if (searchPaths) {
+        if (searchPaths && Array.isArray(searchPaths)) {
             var matches = searchPaths.filter(function(p) {
                 return p.indexOf(new_path) > -1;
             });

@@ -7,7 +7,7 @@ android {
         minSdkVersion Integer.valueOf(min_sdk_version)
         targetSdkVersion Integer.valueOf(target_sdk_version)
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
@@ -37,13 +37,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     api 'com.facebook.react:react-native:0.56.0'
     implementation 'com.alibaba:fastjson:1.2.51'
-//    api project(':react-native-code-push')
+    //    api project(':react-native-code-push')
+    implementation files('libs/nimbus-jose-jwt-5.1.jar')
 }
 
-ext {
-    GROUP_ID="com.aicaigroup" //改成你的groupId
-    ARTIFACT_ID="react-native"  //改成你的artifactId
-    VERSION_NAME="0.1.0"      //改成你的版本号
-}
-apply from:"./maven.gradle"
+apply from: "../node_modules/react-native/react.gradle"
+apply from: "./codepush.gradle"
 

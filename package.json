@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "16.5.2",
     "react-native": "0.56.0",
+    "react-native-code-push": "^5.4.2",
     "react-native-update": "5.1.2",
     "react-navigation": "2.17.0"
   }
