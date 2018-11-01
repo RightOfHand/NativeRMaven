@@ -1,4 +1,4 @@
-package app.songy.com.lib_rn;
+package app.songy.com.android;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("app.songy.com.maven.test", appContext.getPackageName());
+        assertEquals("app.songy.com.lib-rn", appContext.getPackageName());
     }
 }

@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-
 android {
     compileSdkVersion Integer.valueOf(compile_sdk_version)
     buildToolsVersion build_tools_version
@@ -11,9 +10,15 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
-            abiFilters "armeabi-v7a", "x86"
+           abiFilters "armeabi-v7a", "x86"
+        }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
         }
     }
+
 
     buildTypes {
         release {
@@ -21,26 +26,46 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+//    sourceSets {
+//        main {
+//            jniLibs.srcDirs = ['libs']
+//        }
+//    }
     packagingOptions {
         exclude "lib/arm64-v8a/libreactnativejni.so"
     }
-    configurations.all {
-        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+//    configurations.all {
+//        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+//    }
+    lintOptions {
+        abortOnError false
     }
 }
-
+//repositories {
+//    flatDir {
+//        dir "../${project.name}/libs"
+//    }
+//}
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    //    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    api 'com.facebook.react:react-native:0.56.0'
     implementation 'com.alibaba:fastjson:1.2.51'
-    //    api project(':react-native-code-push')
-    implementation files('libs/nimbus-jose-jwt-5.1.jar')
+    implementation 'com.nimbusds:nimbus-jose-jwt:5.1'
+    implementation 'com.walmartlabs.ern:react-native:0.56.0'
+    api group: alibaba_group, version: arouter_api_version, name: 'arouter-api'
+//    implementation group: alibaba_group, version: arouter_annotation_version, name: 'arouter-annotation'
+    annotationProcessor group: alibaba_group, version: arouter_compile_version, name: 'arouter-compiler'
 }
 
+ext {
+    GROUP_ID="com.aicaigroup" //改成你的groupId
+    ARTIFACT_ID="rn"  //改成你的artifactId
+    VERSION_NAME="0.1.5.5"      //改成你的版本号
+}
 apply from: "../node_modules/react-native/react.gradle"
 apply from: "./codepush.gradle"
+apply from: "./maven.gradle"
 
