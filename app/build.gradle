@@ -81,7 +81,6 @@ dependencies {
     //    implementation(name: 'lib-rn-release', ext: 'aar')
     //        implementation "com.aicaigroup:rn:0.1.6.7-SNAPSHOT"
     implementation project(':lib-rn')
-    implementation 'org.mindrot:jbcrypt:0.4'
 }
 //apply from "react.gradle"
 //apply from "../../node_modules/react-native-code-push/android/codepush.gradle"
