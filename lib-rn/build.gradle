@@ -16,7 +16,6 @@ android {
             }
         }
         ndk {
-            moduleName "libgnustl_shared.so"
             abiFilters "armeabi-v7a"
         }
     }
