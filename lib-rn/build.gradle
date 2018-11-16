@@ -90,7 +90,7 @@ dependencies {
 ext {
     GROUP_ID="com.songy" //改成你的groupId
     ARTIFACT_ID="rn"  //改成你的artifactId
-    VERSION_NAME="0.1.7.5"      //改成你的版本号
+    VERSION_NAME="0.1.7.8"      //改成你的版本号
 }
 apply from: "../node_modules/react-native/react.gradle"
 apply from: "./codepush.gradle"

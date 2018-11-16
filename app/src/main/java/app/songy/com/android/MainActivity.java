@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent=new Intent(MainActivity.this, ReactContainerActivity.class);
-                intent.putExtra(RNConstants.RN_PARAM_MODULE_NAME,"hybridapp");
+//                intent.putExtra(RNConstants.RN_PARAM_MODULE_NAME,"hybridapp");
+                intent.putExtra(RNConstants.RN_PARAM_MODULE_NAME,"android");
                 startActivityForResult(intent,1);
             }
         });

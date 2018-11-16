@@ -51,7 +51,7 @@ export default class SplashScreen extends React.Component<Props> {
   //navigate('ProfileScreen',{message:"come here"})
     return (
       <View style={styles.container}>
-        <Text style={styles.hello} onPress={()=>this._hotUpdate}>current version 1.2.2</Text>
+        <Text style={styles.hello} onPress={()=>this._hotUpdate}>current version 1.0.1</Text>
       </View>
 
     );

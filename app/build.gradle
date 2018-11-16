@@ -9,11 +9,11 @@ android {
         minSdkVersion Integer.valueOf(min_sdk_version)
         targetSdkVersion Integer.valueOf(target_sdk_version)
         versionCode 1
-        versionName "1.2.2"
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {
-            abiFilters "armeabi-v7a","x86"
+            abiFilters "armeabi-v7a"
         }
     }
     signingConfigs {
@@ -79,8 +79,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //    implementation(name: 'lib-rn-release', ext: 'aar')
-    //        implementation "com.aicaigroup:rn:0.1.6.7-SNAPSHOT"
-    implementation project(':lib-rn')
+    implementation "com.songy:rn:0.1.7.8-SNAPSHOT"
+//    implementation project(':lib-rn')
 }
 //apply from "react.gradle"
 //apply from "../../node_modules/react-native-code-push/android/codepush.gradle"

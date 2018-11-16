@@ -3,8 +3,8 @@
 buildscript {
     
     repositories {
+
 //        maven { url 'http://127.0.0.1:8088/repository/maven-releases/'}
-        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
 
         google()
         jcenter()
@@ -18,11 +18,14 @@ buildscript {
 
 allprojects {
     repositories {
-//        maven { url 'http://127.0.0.1:8088/repository/maven-releases/'}
-        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+
         google()
         jcenter()
-        mavenCentral()
+        maven{
+            url "https//jitpack.io"
+        }
+        maven { url 'http://172.16.12.95:8089/repository/maven-public/'}
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
 
 
 //        maven {
