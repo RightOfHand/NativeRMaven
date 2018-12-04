@@ -8,14 +8,6 @@ import {
 } from 'react-navigation';
 //
 
-var routeConfigs ={
-  SplashScreen: { screen: SplashScreen},
-  ProfileScreen: {screen: ProfileScreen},
-}
-var stackNavigatorConfig ={
-  initialRouteName :'SplashScreen',
-  initialRouteParams :{curEnr:'curEnv'}
-}
 const App = StackNavigator({
   SplashScreen: { screen: SplashScreen},
   ProfileScreen: {screen: ProfileScreen},
