@@ -49,22 +49,6 @@ public class RNBridge extends ReactContextBaseJavaModule {
 
         if (param!=null ){
             Log.d(TAG,param.toString());
-//            String moduleName=null;
-//            String methodName=null;
-//
-//            if (param.hasKey("module")){
-//                moduleName=param.getString("module");
-//            }
-//
-//            if (param.hasKey("method")){
-//                methodName=param.getString("method");
-//            }
-//            if (moduleName!=null && methodName!=null && moduleName.equals("RN") && methodName.equals("close")){
-//                if (mCurrentActvity!=null && mCurrentActvity instanceof ReactContainerActivity){
-//                    mCurrentActvity.finish();
-//                }
-//            }
-
                 JSONObject jsonResult=JSON.parseObject(param.toString());
                 if (jsonResult!=null){
                     JSONObject jsonObject=jsonResult.getJSONObject("NativeMap");
@@ -106,42 +90,6 @@ public class RNBridge extends ReactContextBaseJavaModule {
                     }
 
                 }
-
-
-// else if (jsonObject.containsValue("tools") && jsonObject.containsValue("callPhone")){
-//                                Log.d(TAG+":support H5 protocol:",JSON.toJSONString(jsonObject));
-//                                    if (jsonObject.containsKey("params")){
-//                                        JSONObject paramObject=jsonObject.getJSONObject("params");
-//
-//                                        if (paramObject!=null && paramObject.containsKey("phone")){
-//                                            final String phoneNumber=paramObject.getString("phone");
-//                                            Log.d(TAG+"phone:",phoneNumber+"");
-//                                            if (CheckPermissionUtils.hasPhonePermission(mCurrentActivity)){
-//                                                if (phoneNumber!=null) DeviceHelper.callPhone(mCurrentActivity,phoneNumber);
-//                                            }else {
-//                                                CheckPermissionUtils.checkPhonePermission(mCurrentActivity,new CheckPermissionUtils.PermissionRequestCallback(){
-//                                                    @Override
-//                                                    public void hasPermission() {
-//                                                        if (phoneNumber!=null) DeviceHelper.callPhone(mCurrentActivity,phoneNumber);
-//                                                    }
-//
-//                                                    @Override
-//                                                    public void noPermission() {
-//
-//                                                    }
-//                                                });
-//                                            }
-//                                        }
-//
-//                                    }
-//
-//
-//
-//
-//                            }
-
-
-
         }
 
 
@@ -149,4 +97,8 @@ public class RNBridge extends ReactContextBaseJavaModule {
     }
 
 
+    @ReactMethod
+    public void debug(String param, Callback callback){
+        Log.d(TAG,param.toString());
+    }
 }

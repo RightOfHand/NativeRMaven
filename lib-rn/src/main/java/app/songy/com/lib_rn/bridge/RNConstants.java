@@ -15,6 +15,8 @@ public interface RNConstants {
     String RN_PARAM_BUNDLE_NAME="bundleName";
     String RN_PARAM_JS_MAIN_PATH="indexPath";
     String RN_PARAM_MODULE_NAME="moduleName";
+    String RN_INIT_SERVER_KEY="curEnv";
+    String RN_INIT_UA="user-agent";
 
 
 }

@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent=new Intent(MainActivity.this, ReactContainerActivity.class);
 //                intent.putExtra(RNConstants.RN_PARAM_MODULE_NAME,"hybridapp");
                 intent.putExtra(RNConstants.RN_PARAM_MODULE_NAME,"android");
+                intent.putExtra(RNConstants.RN_INIT_SERVER_KEY,"开发环境");
+                intent.putExtra(RNConstants.RN_INIT_UA,"song");
                 startActivityForResult(intent,1);
             }
         });
